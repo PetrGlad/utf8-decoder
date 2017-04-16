@@ -2,6 +2,8 @@ group 'net.readmarks'
 version '1.0'
 
 apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'maven-publish'
 
 sourceCompatibility = 1.8
 
