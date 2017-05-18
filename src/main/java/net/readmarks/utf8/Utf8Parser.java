@@ -3,8 +3,8 @@ package net.readmarks.utf8;
 /**
  * Reactively parses incoming byte sequences.
  * Call {@link #put(byte[])} method for each successive byte in input stream, when whole codepoint
- * is parsed consumer will be called with this value. When exception is thrown by this parser all subsequent
- * input will throw exceptions (parsing will not continue after error).
+ * is parsed consumer gets this value. If exception is thrown by the parser then all subsequent
+ * inputs will cause exceptions (parsing will not continue after error).
  * <p>
  * Unicode UTF-8
  * <pre>
