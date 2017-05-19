@@ -6,7 +6,7 @@ apply plugin: 'maven'
 apply plugin: 'maven-publish'
 
 group 'net.readmarks'
-version '1.0'
+version '1.0.1'
 
 repositories {
     jcenter()
@@ -20,8 +20,8 @@ dependencies {
 }
 
 bintray {
-    user = bintrayUser
-    key = bintrayKey
+    user = bintrayUser // set this in gradle properties
+    key = bintrayKey // set this in gradle properties
     publications = ['Publication']
     pkg {
         repo = 'readmarks'
@@ -30,10 +30,10 @@ bintray {
         websiteUrl = 'https://github.com/PetrGlad/utf8-decoder'
         vcsUrl = 'https://github.com/PetrGlad/utf8-decoder.git'
         version {
-            name = '1.0'
+            name = project.version
             desc = 'First release'
             released = new Date()
-            vcsTag = 'v1.0'
+            vcsTag = 'v' + version
         }
     }
 }
@@ -44,7 +44,7 @@ publishing {
             from components.java
             groupId 'net.readmarks'
             artifactId 'utf8-decoder'
-            version '1.0'
+            version project.version
         }
     }
 }

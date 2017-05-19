@@ -1,26 +1,16 @@
 # Reactive non blocking parser for UTF-8 encoding
 
-[ ![Download](https://api.bintray.com/packages/petrglad/readmarks/utf8-decoder/images/download.svg?version=1.0) ](https://bintray.com/petrglad/readmarks/utf8-decoder/1.0/link)
+ [ ![Download](https://api.bintray.com/packages/petrglad/readmarks/utf8-decoder/images/download.svg) ](https://bintray.com/petrglad/readmarks/utf8-decoder/_latestVersion)
 
-build.gradle:
+Dependency for build.gradle:
 ```groovy
 repositories {
   jcenter()
 }
 
 dependencies {
-      compile 'net.readmarks:utf8-decoder:0.1'
+      compile 'net.readmarks:utf8-decoder:1.0.1'
 }
-```
-
-Maven:
-```xml
-<dependency>
-    <groupId>net.readmarks</groupId>
-    <artifactId>utf8-decoder</artifactId>
-    <version>1.0</version>
-    <type>pom</type>
-</dependency>
 ```
 
 Usage example 
