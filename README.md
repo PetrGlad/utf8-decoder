@@ -1,10 +1,34 @@
 # Reactive non blocking parser for UTF-8 encoding
 
+[ ![Download](https://api.bintray.com/packages/petrglad/readmarks/utf8-decoder/images/download.svg?version=1.0) ](https://bintray.com/petrglad/readmarks/utf8-decoder/1.0/link)
+
+build.gradle:
+```groovy
+repositories {
+  jcenter()
+}
+
+dependencies {
+      compile 'net.readmarks:utf8-decoder:0.1'
+}
+```
+
+Maven:
+```xml
+<dependency>
+    <groupId>net.readmarks</groupId>
+    <artifactId>utf8-decoder</artifactId>
+    <version>1.0</version>
+    <type>pom</type>
+</dependency>
+```
+
 Usage example 
 ```java
+import net.readmarks.utf8.Utf8Decoder;
 class Utf8Printer {
   static void printParsed(byte[] utf8bytes) {
-    final Utf8Parser parser = new Utf8Parser(System.out.print);
+    final Utf8decoder parser = new Utf8decoder(System.out.print);
     parser.put(utf8bytes); // You can call this multiple times.
     parser.end(); // Check encoding at end of input stream.
   }
@@ -26,7 +50,7 @@ An advantage of this parser is handling partial code points without restarts.
 Consider case when bytes of a code point are split between 2 adjacent byte buffers.
 It is upsetting how often this case is overlooked especially in examples code.
 Proper implementation cannot UTF-8 decode incoming buffers independently but should 
-also consider this case. 
+also consider this case.
 
 #### References
 

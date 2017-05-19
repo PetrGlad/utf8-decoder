@@ -20,18 +20,19 @@ dependencies {
 }
 
 bintray {
-    user = System.getenv('BINTRAY_USER')
-    key = System.getenv('BINTRAY_KEY')
+    user = bintrayUser
+    key = bintrayKey
     publications = ['Publication']
     pkg {
         repo = 'readmarks'
-        name = 'urf8-decoder'
+        name = 'utf8-decoder'
         licenses = ['Apache-2.0']
-        vcsUrl = 'https://github.com/PetrGlad/utf8-decoder'
+        websiteUrl = 'https://github.com/PetrGlad/utf8-decoder'
+        vcsUrl = 'https://github.com/PetrGlad/utf8-decoder.git'
         version {
             name = '1.0'
             desc = 'First release'
-            released  = new Date()
+            released = new Date()
             vcsTag = 'v1.0'
         }
     }
@@ -42,7 +43,7 @@ publishing {
         Publication(MavenPublication) {
             from components.java
             groupId 'net.readmarks'
-            artifactId 'urf8-decoder'
+            artifactId 'utf8-decoder'
             version '1.0'
         }
     }

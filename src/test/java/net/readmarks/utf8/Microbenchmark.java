@@ -26,7 +26,7 @@ public class Microbenchmark {
       final StringBuilder parsed = new StringBuilder(n * 10);
 
       final long t1 = System.currentTimeMillis();
-      final Utf8Parser parser = new Utf8Parser(parsed::append);
+      final Utf8Decoder parser = new Utf8Decoder(parsed::append);
       parser.put(utf8Encoded);
       parser.end();
       assertEquals(sb.length(), parsed.length());

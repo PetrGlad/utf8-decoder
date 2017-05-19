@@ -16,7 +16,7 @@ package net.readmarks.utf8;
  *   0x04000000 .. 0x7FFFFFFF: 111111xx 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx
  * </pre>
  */
-public class Utf8Parser {
+public class Utf8Decoder {
 
   public interface Consumer {
     void put(char ch);
@@ -34,7 +34,7 @@ public class Utf8Parser {
   int bitPrefixCount = -1; // is a class member for testing
   int maskedVal = -1; // is a class member for testing
 
-  public Utf8Parser(Consumer out) {
+  public Utf8Decoder(Consumer out) {
     this.out = out;
   }
 
@@ -99,8 +99,9 @@ public class Utf8Parser {
           remainingCount = COUNT_INIT;
         }
       } else {
+        final int c = remainingCount;
         remainingCount = COUNT_ERR;
-        throw new IllegalStateException("UTF8 decoder error: Remaining count " + remainingCount);
+        throw new IllegalStateException("UTF8 decoder error: Remaining count " + c);
       }
       inputPosition++;
     }

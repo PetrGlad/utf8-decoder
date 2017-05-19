@@ -6,8 +6,9 @@ import java.nio.charset.StandardCharsets;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
-public class Utf8ParserTest {
+public class Utf8DecoderTest {
 
   private void checkSample(String sample, boolean isStrict) {
     final byte[] bytes = sample.getBytes(StandardCharsets.UTF_8);
@@ -15,7 +16,7 @@ public class Utf8ParserTest {
     assertTrue(!isStrict || standardEquals); // Self test
     if (isStrict || standardEquals) {
       final StringBuilder parsed = new StringBuilder();
-      final Utf8Parser parser = new Utf8Parser(parsed::append);
+      final Utf8Decoder parser = new Utf8Decoder(parsed::append);
       parser.put(bytes);
       parser.end();
       assertEquals(sample, parsed.toString());
@@ -50,19 +51,9 @@ public class Utf8ParserTest {
     }
   }
 
-  @Test // (expected = IllegalArgumentException.class)
-  public void veryLargeCodePoint() {
-    // TODO (test) Implement
-  }
-
-  @Test // (expected = IllegalArgumentException.class)
-  public void exceptionAfterFailure() {
-    // TODO (test) Implement
-  }
-
   @Test
   public void internalCountAndVal() {
-    final Utf8Parser p = new Utf8Parser(character -> {
+    final Utf8Decoder p = new Utf8Decoder(character -> {
     });
     p.matchMask((byte) 0b0100_0010);
     assertEquals(0, p.bitPrefixCount);
@@ -95,9 +86,24 @@ public class Utf8ParserTest {
 
   @Test(expected = IllegalArgumentException.class)
   public void internalCountAndValFail() {
-    final Utf8Parser p = new Utf8Parser(character -> {
+    final Utf8Decoder p = new Utf8Decoder(character -> {
     });
     p.matchMask((byte) 0xff);
   }
 
+  @Test(expected = IllegalArgumentException.class)
+  public void stopAcceptingOnFail() {
+    final Utf8Decoder p = new Utf8Decoder(character -> {
+    });
+    try {
+      p.put(new byte[]{
+              (byte) 0xff
+      });
+      fail("Expecting exception");
+    } catch (IllegalStateException _e) {
+      p.put(new byte[]{
+              (byte) 'a'
+      }); // Not accepting because failed before.
+    }
+  }
 }
