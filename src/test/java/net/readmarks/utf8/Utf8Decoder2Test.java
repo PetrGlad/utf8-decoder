@@ -50,6 +50,17 @@ public class Utf8Decoder2Test {
   }
 
   @Test
+  public void testParser3() {
+    for (char c1 = 0; c1 < 500; c1++) {
+      for (char c2 = 0; c2 < 300; c2++) {
+        for (char c3 = 0; c3 < 50; c3++) {
+          checkSample(new String(new char[]{c1, c2, c3}), false, 10, 6);
+        }
+      }
+    }
+  }
+
+  @Test
   public void testBufferMultichunk() {
     for (int chunk = 1; chunk < 100; chunk++) {
       for (int bufferCapacity = 6; bufferCapacity < 100; bufferCapacity++) {

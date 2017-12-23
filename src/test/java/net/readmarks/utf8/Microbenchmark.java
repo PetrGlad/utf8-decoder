@@ -26,17 +26,6 @@ public class Microbenchmark {
       final StringBuilder parsed = new StringBuilder(n * 10);
 
       final long t1 = System.currentTimeMillis();
-      final Utf8Decoder parser = new Utf8Decoder(parsed::append);
-      parser.put(utf8Encoded);
-      parser.end();
-      assertEquals(sb.length(), parsed.length());
-      System.out.println("(v1) " + (getElapsed(utf8Encoded.length, t1)) + " mS/Mb");
-    }
-    System.out.println();
-    for (int ll = 0; ll < 80; ll++) {
-      final StringBuilder parsed = new StringBuilder(n * 10);
-
-      final long t1 = System.currentTimeMillis();
       final Utf8Decoder2 parser = new Utf8Decoder2(parsed::append, 2048);
       parser.put(utf8Encoded, 0, utf8Encoded.length);
       parser.end();
