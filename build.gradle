@@ -6,7 +6,7 @@ apply plugin: 'maven'
 apply plugin: 'maven-publish'
 
 group 'net.readmarks'
-version '1.0.1'
+version '1.1.0'
 
 repositories {
     jcenter()
@@ -19,32 +19,32 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
 
-bintray {
-    user = bintrayUser // set this in gradle properties
-    key = bintrayKey // set this in gradle properties
-    publications = ['Publication']
-    pkg {
-        repo = 'readmarks'
-        name = 'utf8-decoder'
-        licenses = ['Apache-2.0']
-        websiteUrl = 'https://github.com/PetrGlad/utf8-decoder'
-        vcsUrl = 'https://github.com/PetrGlad/utf8-decoder.git'
-        version {
-            name = project.version
-            desc = 'First release'
-            released = new Date()
-            vcsTag = 'v' + version
-        }
-    }
-}
-
-publishing {
-    publications {
-        Publication(MavenPublication) {
-            from components.java
-            groupId 'net.readmarks'
-            artifactId 'utf8-decoder'
-            version project.version
-        }
-    }
-}
+//bintray {
+//    user = bintrayUser // set this in gradle properties
+//    key = bintrayKey // set this in gradle properties
+//    publications = ['Publication']
+//    pkg {
+//        repo = 'readmarks'
+//        name = 'utf8-decoder'
+//        licenses = ['Apache-2.0']
+//        websiteUrl = 'https://github.com/PetrGlad/utf8-decoder'
+//        vcsUrl = 'https://github.com/PetrGlad/utf8-decoder.git'
+//        version {
+//            name = project.version
+//            desc = 'First release'
+//            released = new Date()
+//            vcsTag = 'v' + version
+//        }
+//    }
+//}
+//
+//publishing {
+//    publications {
+//        Publication(MavenPublication) {
+//            from components.java
+//            groupId 'net.readmarks'
+//            artifactId 'utf8-decoder'
+//            version project.version
+//        }
+//    }
+//}

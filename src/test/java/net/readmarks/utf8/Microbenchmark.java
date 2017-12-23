@@ -19,7 +19,7 @@ public class Microbenchmark {
     for (int ll = 1; ll < 80; ll++) {
       final long t1 = System.currentTimeMillis();
       assertEquals(sb.length(), new String(utf8Encoded, StandardCharsets.UTF_8).length());
-      System.out.println("(default) " + getElapsed(utf8Encoded.length, t1) + " mS/Mb");
+      System.out.println("(nio.charset) " + getElapsed(utf8Encoded.length, t1) + " mS/Mb");
     }
     System.out.println();
     for (int ll = 0; ll < 80; ll++) {
@@ -30,7 +30,18 @@ public class Microbenchmark {
       parser.put(utf8Encoded);
       parser.end();
       assertEquals(sb.length(), parsed.length());
-      System.out.println("(this) " + (getElapsed(utf8Encoded.length, t1)) + " mS/Mb");
+      System.out.println("(v1) " + (getElapsed(utf8Encoded.length, t1)) + " mS/Mb");
+    }
+    System.out.println();
+    for (int ll = 0; ll < 80; ll++) {
+      final StringBuilder parsed = new StringBuilder(n * 10);
+
+      final long t1 = System.currentTimeMillis();
+      final Utf8Decoder2 parser = new Utf8Decoder2(parsed::append, 2048);
+      parser.put(utf8Encoded, 0, utf8Encoded.length);
+      parser.end();
+      assertEquals(sb.length(), parsed.length());
+      System.out.println("(v2) " + (getElapsed(utf8Encoded.length, t1)) + " mS/Mb");
     }
   }
 
